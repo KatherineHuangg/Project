@@ -1,0 +1,334 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>lifecontract</title>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script type="text/javascript"></script>
+    <style>
+        .row{
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!--新增新帳戶-->
+    <div class="container" style="width: 600px;">
+        <div class="row" style="text-align: center">
+            <h1> 生活公約 </h1>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <input type="text" class="form-control" placeholder="請輸入賬戶密碼" id="password">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">                   
+                <input class="btn btn-primary btn-block" type="submit" value="提交" id="addaccount">
+            </div>
+        </div>
+    </div>
+
+    <!--列出所有地址以及他的餘額-->
+    <div class="container" style="width: 600px;margin-top: 10px" id="account-list">    
+    </div>
+
+    <!--指定要轉帳的對象-->
+    <div class="container" style="width: 600px;margin-top: 10px">
+        <div class="row">
+            <div class="col-md-12">
+                    <div class="form-group form-group-sm">
+                        <label class="col-sm-2 control-label" for="address_from">from</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" type="text" id="address_from" placeholder="轉賬方地址">
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <div class="row">
+                <div class="col-md-12">
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-2 control-label" for="address_to">to</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="text" id="address_to" placeholder="接收方地址">
+                            </div>
+                        </div>
+                </div>
+        </div>
+        <div class="row">
+                <div class="col-md-12">
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-2 control-label" for="trans_value">金額</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="text" id="trans_value" placeholder="轉賬金額">
+                            </div>
+                        </div>
+                </div>
+        </div>
+        <div class="row">
+                <div class="col-md-12">
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-2 control-label" for="trans_password">密碼</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="text" id="trans_password" placeholder="密碼">
+                            </div>
+                        </div>
+                </div>
+        </div>
+        <div class="row">
+                <div class="col-md-12">                   
+                    <input class="btn btn-primary btn-block" type="submit" value="轉賬" id="trans_btn">
+                </div>
+        </div>
+    </div>
+
+    <!--解鎖帳戶-->
+    <div class="container" style="width: 600px;">
+        <div class="row">
+            <div class="col-md-12">
+                <input type="text" class="form-control" placeholder="預解鎖地址" id="unlockaddr">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <input type="text" class="form-control" placeholder="請輸入密碼" id="unlockpassword">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">                   
+                <input class="btn btn-primary btn-block" type="submit" value="提交" id="unlockAccount">
+            </div>
+        </div>
+    </div>
+
+    <!--設定該房客的生活公約-->
+    <div class="container" >
+        <div class="row">
+            <div class="col-md-12">
+                <input type="text" class="form-control" placeholder="房號" id="houseNumber">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <input type="text" class="form-control" placeholder="房客地址" id="tenantAddress">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <input type="text" class="form-control" placeholder="可否養寵物(請輸入0 或 1)" id="keeppet">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <input type="text" class="form-control" placeholder="可否抽煙(請輸入0 或 1)" id="smoke">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <input type="text" class="form-control" placeholder="可否喝酒(請輸入0 或 1)" id="drinking">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <input type="text" class="form-control" placeholder="可否帶男女盆友回家(請輸入0 或 1)" id="gbfriend">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">                   
+                <input class="btn btn-primary btn-block" type="submit" value="設定該房客之生活公約" id="addTenant">
+            </div>
+        </div>
+    </div>
+    
+    <!--設定該房之罰金-->
+    <div class="container" >
+        <div class="row">
+            <div class="col-md-12">
+                <input type="text" class="form-control" placeholder="房號" id="houseNum">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <input type="text" class="form-control" placeholder="設定的房客" id="tenantAddr">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <input type="text" class="form-control" placeholder="寵物罰金" id="petcoin">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <input type="text" class="form-control" placeholder="抽煙罰金" id="smokecoin">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <input type="text" class="form-control" placeholder="喝酒罰金" id="drinkingcoin">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <input type="text" class="form-control" placeholder="帶男女盆友罰金" id="gbfriendcoin">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">                   
+                <input class="btn btn-primary btn-block" type="submit" value="設定該房罰金" id="setCoinRule">
+            </div>
+        </div>
+    </div>
+
+    <!--查詢該房之罰金規則-->
+    <div class="container" style="width: 600px;">
+        <div class="row">
+            <div class="col-md-12">
+                <input type="text" class="form-control" placeholder="輸入房號" id="house">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">                   
+                <input class="btn btn-primary btn-block" type="submit" value="查詢該房之罰金規則" id="getCoinRule">
+            </div>
+        </div>
+    </div>
+
+    <!---->
+    <div class="container" style="width: 600px;">
+        <div class="row">
+            <div class="col-md-12">
+                <input type="text" class="form-control" placeholder="請輸入預查房號" id="housenum">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">                   
+                <input class="btn btn-primary btn-block" type="submit" value="查詢該房房客們之生活公約" id="getTenantsfromHouse">
+            </div>
+        </div>
+    </div>
+
+    <!--取得房客之生活公約-->
+    <div class="container" style="width: 600px;">
+        <div class="row">
+            <div class="col-md-12">
+                <input type="text" class="form-control" placeholder="請輸入預查房客地址" id="tenant">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">                   
+                <input class="btn btn-primary btn-block" type="submit" value="取得該房客之生活公約" id="getTenantInfofromAddr">
+            </div>
+        </div>
+    </div>
+
+    <!--某地址上傳照片的網址-->
+    <div class="container" style="width: 600px;">
+        <div class="row">
+            <div class="col-md-12">
+                <input type="text" class="form-control" placeholder="請輸入預記照片之網址" id="pictUrl">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <input type="text" class="form-control" placeholder="請輸入您的地址" id="yourAddr">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">                   
+                <input class="btn btn-primary btn-block" type="submit" value="提交" id="recordPict">
+            </div>
+        </div>
+    </div>
+
+    <!--取得該地址上傳過哪些照片-->
+    <div class="container" style="width: 600px;">
+        <div class="row">
+            <div class="col-md-12">
+                <input type="text" class="form-control" placeholder="請輸入預查詢圖片之地址" id="owneraddr">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">                   
+                <input class="btn btn-primary btn-block" type="submit" value="取得該地址圖片" id="getPict">
+            </div>
+        </div>
+    </div>
+
+    <!--轉帳罰金給合約-->
+    <div class="container" style="width: 600px;margin-top: 10px">
+        <div class="row">
+            <div class="col-md-12">
+                    <div class="form-group form-group-sm">
+                        <label class="col-sm-2 control-label" for="tenant_address">from</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" type="text" id="tenant_address" placeholder="房客地址">
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <div class="row">
+                <div class="col-md-12">
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-2 control-label" for="transvalue">金額</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="text" id="transvalue" placeholder="轉賬金額">
+                            </div>
+                        </div>
+                </div>
+        </div>
+        <div class="row">
+                <div class="col-md-12">
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-2 control-label" for="transpassword">密碼</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="text" id="transpassword" placeholder="密碼">
+                            </div>
+                        </div>
+                </div>
+        </div>
+        <div class="row">
+                <div class="col-md-12">
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-2 control-label" for="transpassword">輸入您的房號</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="text" id="homenum" placeholder="房號">
+                            </div>
+                        </div>
+                </div>
+        </div>
+        
+        <div class="row">
+                <div class="col-md-12">                   
+                    <input class="btn btn-primary btn-block" type="submit" value="轉賬罰金給合約" id="penaltyToContract">
+                </div>
+        </div>
+    </div>
+
+    <!--查詢該房客是否已繳罰金.ps,只能按一次，按過一次後又會回到false-->
+    <div class="container" style="width: 600px;">
+        <div class="row">
+            <div class="col-md-12">
+                <input type="text" class="form-control" placeholder="輸入房客地址" id="tenantaddr">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">                   
+                <input class="btn btn-primary btn-block" type="submit" value="查詢該房客是否已繳罰金" id="ifPaidPenalty">
+            </div>
+        </div>
+    </div>
+
+    <!--取得合約目前的金錢-->    
+    <div class="container" style="width: 600px;">
+        <div class="row">
+            <div class="col-md-12">                   
+                <input class="btn btn-primary btn-block" type="submit" value="取得合約目前金錢" id="getcontractmoney">
+            </div>
+        </div>
+    </div>
+
+    <script src="main2.js"></script>
+
+</body>
+</html>
